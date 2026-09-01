@@ -14,14 +14,16 @@ import { QuizView } from './components/QuizView';
 import { FontDialogModal } from './components/FontDialogModal';
 import { ParagraphDialogModal } from './components/ParagraphDialogModal';
 import { TableCellDialogModal } from './components/TableCellDialogModal';
+import { OnePageReportModal } from './components/OnePageReportModal';
 import { PRACTICE_MISSIONS } from './data/missions';
 import { CurriculumSection } from './types';
-import { Sparkles, BookOpen, ExternalLink, Keyboard, Heart } from 'lucide-react';
+import { Sparkles, BookOpen, Keyboard, Heart } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<TabType>('guide');
   const [completedMissions, setCompletedMissions] = useState<string[]>(['mission-1']);
   const [activeGlobalModal, setActiveGlobalModal] = useState<'font' | 'paragraph' | 'table' | null>(null);
+  const [isExplanationOpen, setIsExplanationOpen] = useState(false);
 
   // Dialog default values for stand-alone modal preview
   const [modalTracking, setModalTracking] = useState(-4);
@@ -50,6 +52,7 @@ export default function App() {
           onTabChange={setCurrentTab}
           completedMissionsCount={completedMissions.length}
           totalMissionsCount={PRACTICE_MISSIONS.length}
+          onOpenExplanation={() => setIsExplanationOpen(true)}
         />
 
         {/* Main Content Body */}
@@ -110,6 +113,13 @@ export default function App() {
         }}
       />
 
+      {/* 1페이지 보고서 설명 가이드 모달 */}
+      <OnePageReportModal
+        isOpen={isExplanationOpen}
+        onClose={() => setIsExplanationOpen(false)}
+        onNavigateToTab={(tab) => setCurrentTab(tab)}
+      />
+
       {/* Footer */}
       <footer className="mt-16 bg-white border-t border-slate-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,24 +129,14 @@ export default function App() {
                 한
               </div>
               <span className="font-semibold text-slate-800">
-                아래한글 보고서 1페이지 압축 학습 플랫폼
+                아래한글 1페이지 보고서 작성 학습 플랫폼
               </span>
-              <span>• UpNote 실무 노하우 기반 제작</span>
             </div>
 
             <div className="flex items-center gap-4 text-xs">
               <span className="flex items-center gap-1 text-slate-600">
                 단축키: <kbd className="kbd-key text-[10px]">Alt+Shift+N/J</kbd>, <kbd className="kbd-key text-[10px]">Ctrl+Shift+Q</kbd>, <kbd className="kbd-key text-[10px]">P</kbd>
               </span>
-              <a
-                href="https://bluestella.tistory.com/118"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline flex items-center gap-1"
-              >
-                <span>참고 원문 블로그</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
             </div>
           </div>
         </div>

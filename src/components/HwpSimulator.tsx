@@ -55,20 +55,6 @@ const TEMPLATES = [
       hasEmptyTableLines: true,
       lastLineZeroHeight: false
     }
-  },
-  {
-    id: 'promotion-notice',
-    title: '고객 프로모션 안내문 (인쇄용)',
-    description: '2장 출력 시 인쇄 비용이 2배가 되는 단면 안내문',
-    initial: {
-      tracking: 0,
-      scale: 100,
-      fontSize: 10,
-      lineHeight: 170,
-      tableMarginY: 2.0,
-      hasEmptyTableLines: false,
-      lastLineZeroHeight: false
-    }
   }
 ];
 
@@ -289,7 +275,7 @@ export const HwpSimulator: React.FC = () => {
               </span>
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight break-keep">
-              한글 보고서 1페이지 실시간 압축 작업대
+              1페이지 보고서 실시간 시뮬레이터
             </h2>
           </div>
 
@@ -329,7 +315,7 @@ export const HwpSimulator: React.FC = () => {
             )}
             <div>
               <div className="text-xs font-bold">
-                {isOnePage ? '1페이지 압축 완료 (인쇄 적합)' : '2페이지 초과 (결재 반려 위험)'}
+                {isOnePage ? '1페이지 압축 완료 (인쇄 적합)' : '2페이지 초과 (주의 필요)'}
               </div>
               <div className="text-[11px] text-gray-600 mt-0.5 break-keep">
                 {isOnePage
@@ -621,36 +607,35 @@ export const HwpSimulator: React.FC = () => {
             </div>
 
             {/* Document Header */}
-            <div className="border-b-2 border-slate-900 pb-3 mb-5 flex justify-between items-end font-sans">
-              <div>
-                <div className="text-xs text-slate-500 font-medium">문서번호 : 2026-기획-0419호</div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-hwp-gothic mt-1">
-                  {state.selectedTemplate === 'official-doc' && '2026년도 신규 공공사업 추진 계획 및 주요 협력방안(안)'}
-                  {state.selectedTemplate === 'project-proposal' && '스마트 행정 서비스 혁신 및 업무 자동화 사업 계획서'}
-                  {state.selectedTemplate === 'promotion-notice' && '2026 하반기 시민 참여형 디지털 역량 강화 프로모션 안내문'}
-                </h1>
+            <div className="border-b-2 border-slate-900 pb-3 mb-5 font-sans">
+              <div className="flex justify-end text-xs text-slate-600 text-right font-medium mb-1">
+                <div>
+                  <div>기안일자: 2026. 09. 01.</div>
+                  <div>기안자: 총괄기획팀</div>
+                </div>
               </div>
-              <div className="text-xs text-slate-600 text-right font-medium hidden sm:block">
-                기안일자: 2026. 09. 01.<br />
-                기안자: 총괄기획팀
-              </div>
+              <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-hwp-gothic text-center">
+                스마트 행정 서비스 혁신 및 업무 자동화 사업 계획서
+              </h1>
             </div>
 
             {/* Section 1: Overview */}
             <div className="mb-4">
-              <h2 className="text-sm font-bold text-slate-900 font-hwp-gothic mb-1 flex items-center gap-1.5">
+              <h2 className="text-sm font-bold text-slate-900 font-hwp-gothic mb-1.5 flex items-center gap-1.5">
                 <span className="w-1.5 h-3.5 bg-blue-700 inline-block" />
                 1. 추진 배경 및 개요
               </h2>
-              <p
+              <div
                 style={{
                   transform: `scaleX(${state.scale / 100})`,
                   transformOrigin: 'left'
                 }}
-                className="text-slate-800 text-justify"
+                className="text-slate-800 text-justify space-y-1"
               >
-                급변하는 디지털 행정 환경에 선제적으로 대응하고, 대시민 행정 서비스의 만족도와 신속성을 동시에 향상시키기 위한 통합 실행 계획입니다. 각종 보고서 및 공문서 작성을 한 페이지로 압축하여 결재 프로세스를 대폭 간소화합니다.
-              </p>
+                <div>- <strong>(환경 대응)</strong> 급변하는 디지털 행정 환경에 선제적으로 대응하기 위한 지능형 스마트 업무 인프라 구축</div>
+                <div>- <strong>(품질 향상)</strong> 대시민 맞춤형 원스톱 행정 서비스 제공으로 민원 처리 신속성 및 체감 만족도 극대화</div>
+                <div>- <strong>(업무 혁신)</strong> 단순·반복 행정 업무의 자동화(RPA) 도입을 통한 행정 효율성 제고 및 결재 프로세스 간소화</div>
+              </div>
             </div>
 
             {/* Section 2: Table Content */}
@@ -709,7 +694,7 @@ export const HwpSimulator: React.FC = () => {
                       }}
                       className="border border-slate-400 px-2"
                     >
-                      현장 의견 수렴 및 시범 시스템 인프라 구축
+                      행정 데이터 표준화 및 AI 기반 업무 자동화(RPA) 시범 인프라 구축
                       {state.hasEmptyTableLines && (
                         <div className="text-slate-400 font-mono text-[10px]">
                           ↵ (불필요한 빈 엔터 줄바꿈 존재)
@@ -743,7 +728,7 @@ export const HwpSimulator: React.FC = () => {
                       }}
                       className="border border-slate-400 px-2"
                     >
-                      관계 기관 간 전산망 연계 및 표준 서식 공유
+                      스마트 민원 플랫폼 고도화 및 전 부서 행정 전산망 연계 확대
                       {state.hasEmptyTableLines && (
                         <div className="text-slate-400 font-mono text-[10px]">
                           ↵ (불필요한 빈 엔터 줄바꿈 존재)
@@ -777,9 +762,9 @@ export const HwpSimulator: React.FC = () => {
                 }}
                 className="space-y-1 text-slate-800 list-disc list-inside"
               >
-                <li>보고서의 시각적 명확성 확보로 임원 보고 시간 40% 단축</li>
-                <li>양면 및 추가 페이지 인쇄 비용 연간 1,200만원 절감</li>
-                <li>공문서 표준 서식 준수율 100% 달성 및 시민 피드백 즉시 반영</li>
+                <li>단순·반복 업무 자동화로 연간 2,500시간의 행정 인력 절감 효과 창출</li>
+                <li>수작업 행정 오류 사전 차단 및 스마트 대시민 행정 만족도 95% 달성</li>
+                <li>전 부서 표준 자동화 서식 준수율 100% 달성 및 실시간 피드백 체계 가동</li>
               </ul>
             </div>
 
@@ -807,7 +792,7 @@ export const HwpSimulator: React.FC = () => {
                 }}
                 className="text-slate-800 text-xs leading-normal text-justify"
               >
-                상기 계획에 따라 관계 부서와의 긴밀한 사전 협의를 거쳐 차질 없이 사업을 집행할 예정이며, 세부 실행 결과는 익월 월간 보고회에서 종합 보고드리고자 합니다. 본 안건에 대하여 원안대로 재가하여 주시기 바랍니다.
+                본 스마트 행정 서비스 혁신 및 업무 자동화 사업은 행정 생산성 제고와 대시민 서비스 품질 혁신을 위한 핵심 과제입니다. 유관 부서와의 긴밀한 사전 협의를 거쳐 차질 없이 추진하고자 하오니, 본 안건에 대하여 원안대로 재가하여 주시기 바랍니다.
               </p>
             </div>
 

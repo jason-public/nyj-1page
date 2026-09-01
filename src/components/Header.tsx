@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, MonitorPlay, Target, Keyboard, HelpCircle, Sparkles, Zap } from 'lucide-react';
+import { BookOpen, MonitorPlay, Target, Keyboard, HelpCircle, Sparkles, Zap, FileText } from 'lucide-react';
 
 export type TabType = 'curriculum' | 'guide' | 'simulator' | 'missions' | 'shortcuts' | 'quiz';
 
@@ -8,13 +8,15 @@ interface HeaderProps {
   onTabChange: (tab: TabType) => void;
   completedMissionsCount: number;
   totalMissionsCount: number;
+  onOpenExplanation?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentTab,
   onTabChange,
   completedMissionsCount,
-  totalMissionsCount
+  totalMissionsCount,
+  onOpenExplanation
 }) => {
   const tabs = [
     {
@@ -76,19 +78,31 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Quick Mission Progress Badge */}
-          <div className="hidden md:flex items-center gap-3 bg-gray-50 px-3.5 py-1.5 rounded-lg border border-gray-200 text-xs">
-            <span className="text-gray-500 font-medium">퀘스트 진척도</span>
-            <div className="flex items-center gap-2">
-              <div className="w-20 bg-gray-200 rounded-full h-1.5 overflow-hidden">
-                <div
-                  className="bg-blue-600 h-full rounded-full transition-all duration-300"
-                  style={{ width: `${(completedMissionsCount / totalMissionsCount) * 100}%` }}
-                />
+          {/* Header Action & Progress */}
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={onOpenExplanation}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 hover:text-blue-800 border border-blue-200 font-semibold text-xs sm:text-sm rounded-lg transition-colors shadow-2xs cursor-pointer shrink-0"
+              title="1페이지 보고서 완벽 가이드 및 작성 원칙"
+            >
+              <FileText className="w-3.5 h-3.5 text-blue-600" />
+              <span>1페이지 보고서 설명</span>
+            </button>
+
+            {/* Quick Mission Progress Badge */}
+            <div className="hidden lg:flex items-center gap-3 bg-gray-50 px-3.5 py-1.5 rounded-lg border border-gray-200 text-xs">
+              <span className="text-gray-500 font-medium">퀘스트 진척도</span>
+              <div className="flex items-center gap-2">
+                <div className="w-20 bg-gray-200 rounded-full h-1.5 overflow-hidden">
+                  <div
+                    className="bg-blue-600 h-full rounded-full transition-all duration-300"
+                    style={{ width: `${(completedMissionsCount / totalMissionsCount) * 100}%` }}
+                  />
+                </div>
+                <span className="font-semibold font-mono text-gray-700 text-xs">
+                  {completedMissionsCount}/{totalMissionsCount}
+                </span>
               </div>
-              <span className="font-semibold font-mono text-gray-700 text-xs">
-                {completedMissionsCount}/{totalMissionsCount}
-              </span>
             </div>
           </div>
         </div>
