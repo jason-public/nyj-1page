@@ -1,0 +1,6 @@
+{
+  "name": "아래한글 1페이지 보고서 작성 비법",
+  "description": "한글(HWP) 문서에서 자간, 장평, 줄간격, 표 여백 조절 단축키와 실전 노하우를 배우고 인터랙티브 시뮬레이터로 실습하는 학습 플랫폼",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
