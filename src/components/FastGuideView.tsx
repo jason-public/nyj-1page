@@ -83,19 +83,19 @@ export const FastGuideView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+    <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-6 sm:space-y-10">
       {/* Top Main Hero Banner */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-xs">
-        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 border border-blue-100 rounded-md text-xs font-semibold text-blue-700 mb-3">
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-8 shadow-xs">
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 border border-blue-100 rounded-md text-xs font-semibold text-blue-700 mb-2.5">
           <Sparkles className="w-3.5 h-3.5 text-blue-600" />
           <span>한글 실무 특강</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
+        <h1 className="text-xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-2.5 break-keep">
           [한글] 초고속 문서 작성 필수 기능
         </h1>
-        <p className="text-sm text-gray-600 leading-relaxed max-w-3xl">
+        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-3xl break-keep">
           마우스와 키보드를 오가고 아이콘을 찾아 클릭하는 불필요한 동선을 없애고,
-          <strong>키보드만으로 어지간한 실무 문서 작업을 3배 빠르게 처리</strong>하는 핵심 비법을 체계적으로 정리했습니다.
+          <strong> 키보드만으로 어지간한 실무 문서 작업을 3배 빠르게 처리</strong>하는 핵심 비법을 체계적으로 정리했습니다.
         </p>
       </div>
 

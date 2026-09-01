@@ -41,17 +41,17 @@ export const ShortcutCheatsheet: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
       {/* Header Banner */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 shadow-xs mb-8">
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-8 shadow-xs mb-6 sm:mb-8">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 border border-blue-100 rounded-md text-xs font-semibold text-blue-700 mb-2">
           <Keyboard className="w-3.5 h-3.5 text-blue-600" />
           <span>아래한글 실무 단축키 마스터북</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-2">
+        <h2 className="text-xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-2 break-keep">
           1페이지 압축 & 실무 필수 단축키 치트시트
         </h2>
-        <p className="text-sm text-gray-500 max-w-2xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-gray-500 max-w-2xl leading-relaxed break-keep">
           마우스 없이 키보드만으로 보고서의 자간, 장평, 줄간격, 표 속성을 1초 만에 최적화하는 핵심 단축키 모음입니다.
         </p>
       </div>

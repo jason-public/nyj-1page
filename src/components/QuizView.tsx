@@ -43,19 +43,21 @@ export const QuizView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
       {/* Header */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-xs mb-8 flex items-center justify-between">
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-xs mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 border border-blue-100 rounded-md text-xs font-semibold text-blue-700 mb-2">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             한글 실무 압축 스피드 퀴즈
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">1페이지 압축 단축키 & 실무 지식 퀴즈</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight break-keep">
+            1페이지 압축 단축키 & 실무 지식 퀴즈
+          </h2>
         </div>
-        <div className="bg-gray-50 px-4 py-2.5 rounded-xl border border-gray-200 text-center shrink-0">
-          <span className="text-xs text-gray-500 block">문항</span>
-          <span className="text-lg font-bold font-mono text-gray-900">
+        <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 text-center shrink-0">
+          <span className="text-[11px] text-gray-500 block">문항</span>
+          <span className="text-base sm:text-lg font-bold font-mono text-gray-900">
             {isFinished ? QUIZ_QUESTIONS.length : currentIndex + 1} / {QUIZ_QUESTIONS.length}
           </span>
         </div>

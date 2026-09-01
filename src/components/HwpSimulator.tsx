@@ -9,7 +9,8 @@ import {
   Zap,
   Info,
   Maximize2,
-  Table as TableIcon
+  Table as TableIcon,
+  FileText
 } from 'lucide-react';
 import { FontDialogModal } from './FontDialogModal';
 import { ParagraphDialogModal } from './ParagraphDialogModal';
@@ -87,6 +88,7 @@ export const HwpSimulator: React.FC = () => {
   const [activeModal, setActiveModal] = useState<'font' | 'paragraph' | 'table' | null>(null);
   const paperRef = useRef<HTMLDivElement>(null);
   const [heightRatio, setHeightRatio] = useState<number>(105);
+  const [mobileTab, setMobileTab] = useState<'controls' | 'preview'>('preview');
 
   // Trigger feedback
   const showFeedback = (text: string) => {
@@ -253,7 +255,7 @@ export const HwpSimulator: React.FC = () => {
     showFeedback('🔄 기본값으로 초기화되었습니다.');
   };
 
-  const handleTemplateSelect不易 = (id: string) => {
+  const handleTemplateSelect = (id: string) => {
     const tmpl = TEMPLATES.find((t) => t.id === id);
     if (tmpl) {
       setState({
@@ -265,7 +267,7 @@ export const HwpSimulator: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
       {/* Toast Feedback for Shortcut */}
       {shortcutFeedback && (
         <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 border border-blue-500 animate-bounce">
@@ -275,18 +277,18 @@ export const HwpSimulator: React.FC = () => {
       )}
 
       {/* Simulator Header & Status Dashboard */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 shadow-xs mb-6">
+      <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-6 shadow-xs mb-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded-md border border-blue-100">
                 실시간 HWP 시뮬레이터
               </span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500 hidden sm:inline">
                 단축키 <kbd className="kbd-key">Alt+Shift+N</kbd>, <kbd className="kbd-key">Alt+Shift+J</kbd>, <kbd className="kbd-key">Ctrl+Shift+Q</kbd> 지원
               </span>
             </div>
-            <h2 className="text-xl font-bold text-gray-900 tracking-tight">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight break-keep">
               한글 보고서 1페이지 실시간 압축 작업대
             </h2>
           </div>
@@ -297,7 +299,7 @@ export const HwpSimulator: React.FC = () => {
             {TEMPLATES.map((tmpl) => (
               <button
                 key={tmpl.id}
-                onClick={() => handleTemplateSelect不易(tmpl.id)}
+                onClick={() => handleTemplateSelect(tmpl.id)}
                 className={`px-3 py-1.5 text-xs rounded-lg border transition-colors shrink-0 cursor-pointer ${
                   state.selectedTemplate === tmpl.id
                     ? 'bg-blue-50 border-blue-200 text-blue-700 font-semibold'
@@ -311,10 +313,10 @@ export const HwpSimulator: React.FC = () => {
         </div>
 
         {/* 1-Page Status Gauge */}
-        <div className="mt-5 pt-5 border-t border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 items-center">
           {/* Status Indicator */}
           <div
-            className={`p-3.5 rounded-xl border flex items-center gap-3 transition-colors ${
+            className={`p-3 sm:p-3.5 rounded-xl border flex items-center gap-3 transition-colors ${
               isOnePage
                 ? 'bg-emerald-50/70 border-emerald-200 text-emerald-900'
                 : 'bg-rose-50/70 border-rose-200 text-rose-900'
@@ -329,7 +331,7 @@ export const HwpSimulator: React.FC = () => {
               <div className="text-xs font-bold">
                 {isOnePage ? '1페이지 압축 완료 (인쇄 적합)' : '2페이지 초과 (결재 반려 위험)'}
               </div>
-              <div className="text-[11px] text-gray-600 mt-0.5">
+              <div className="text-[11px] text-gray-600 mt-0.5 break-keep">
                 {isOnePage
                   ? '모든 본문이 1페이지 100% 안에 완벽 수납되었습니다.'
                   : '마지막 줄 또는 표가 경계선을 초과하여 2장이 인쇄됩니다.'}
@@ -338,7 +340,7 @@ export const HwpSimulator: React.FC = () => {
           </div>
 
           {/* Capacity Gauge Bar */}
-          <div className="bg-gray-50 p-3.5 rounded-xl border border-gray-200">
+          <div className="bg-gray-50 p-3 sm:p-3.5 rounded-xl border border-gray-200">
             <div className="flex justify-between text-xs font-medium text-gray-700 mb-1.5">
               <span>A4 1페이지 용량 게이지</span>
               <span className={`font-mono font-bold ${isOnePage ? 'text-emerald-600' : 'text-rose-600'}`}>
@@ -364,7 +366,7 @@ export const HwpSimulator: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={applyGoldenPreset}
-              className="flex-1 py-2.5 px-3.5 bg-gray-900 hover:bg-gray-800 text-white text-xs font-medium rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              className="flex-1 py-2.5 px-3 bg-gray-900 hover:bg-gray-800 text-white text-xs font-medium rounded-xl flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span>황금 1페이지 압축 (원클릭)</span>
@@ -380,10 +382,38 @@ export const HwpSimulator: React.FC = () => {
         </div>
       </div>
 
+      {/* Mobile View Toggle (Controls vs A4 Paper Preview) */}
+      <div className="lg:hidden flex bg-gray-100 p-1 rounded-xl mb-4 border border-gray-200">
+        <button
+          onClick={() => setMobileTab('controls')}
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 ${
+            mobileTab === 'controls'
+              ? 'bg-white text-blue-700 shadow-xs font-bold'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          <Sliders className="w-3.5 h-3.5" />
+          <span>서식 파라미터 조절</span>
+        </button>
+        <button
+          onClick={() => setMobileTab('preview')}
+          className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 ${
+            mobileTab === 'preview'
+              ? 'bg-white text-blue-700 shadow-xs font-bold'
+              : 'text-gray-600 hover:text-gray-900'
+          }`}
+        >
+          <FileText className="w-3.5 h-3.5" />
+          <span>A4 가상 뷰어 ({heightRatio}%)</span>
+        </button>
+      </div>
+
       {/* Workspace: Left Controls Toolbar / Right Virtual HWP A4 Paper */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Controls Panel */}
-        <div className="lg:col-span-4 bg-white rounded-2xl border border-gray-200 shadow-xs p-5 space-y-5 sticky top-20">
+        <div className={`lg:col-span-4 bg-white rounded-2xl border border-gray-200 shadow-xs p-4 sm:p-5 space-y-5 sticky top-20 ${
+          mobileTab === 'controls' ? 'block' : 'hidden lg:block'
+        }`}>
           <div className="flex items-center justify-between border-b border-gray-100 pb-3">
             <div className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
               <Sliders className="w-3.5 h-3.5 text-blue-600" />
@@ -548,27 +578,30 @@ export const HwpSimulator: React.FC = () => {
         </div>
 
         {/* Right Virtual A4 Paper Container */}
-        <div className="lg:col-span-8 flex flex-col items-center">
+        <div className={`lg:col-span-8 flex flex-col items-center w-full ${
+          mobileTab === 'preview' ? 'block' : 'hidden lg:flex'
+        }`}>
           {/* Paper Ruler Bar */}
-          <div className="w-full max-w-2xl bg-[#e2e8f0] border border-slate-300 rounded-t-lg h-6 flex items-center px-4 justify-between text-[10px] text-slate-500 font-mono select-none">
-            <div className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-blue-500" />
-              <span>A4 세로 (210 × 297 mm) - 한글(HWP) 가상 뷰어</span>
+          <div className="w-full max-w-2xl bg-[#e2e8f0] border border-slate-300 rounded-t-lg h-6 flex items-center px-3 sm:px-4 justify-between text-[10px] text-slate-500 font-mono select-none overflow-hidden">
+            <div className="flex items-center gap-1 truncate">
+              <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+              <span className="truncate">A4 (210×297mm) 한글 가상 뷰어</span>
             </div>
-            <span>여백: 좌20 우20 상20 하15</span>
+            <span className="shrink-0 text-[9px] sm:text-[10px]">여백: 좌20 우20 상20 하15</span>
           </div>
 
-          {/* A4 Paper Canvas */}
-          <div
-            ref={paperRef}
-            className="w-full max-w-2xl bg-white hwp-paper-shadow border-x border-b border-slate-300 p-8 sm:p-12 relative transition-all duration-150 font-hwp-myeongjo select-text"
-            style={{
-              minHeight: '840px',
-              letterSpacing: `${state.tracking * 0.12}px`,
-              fontSize: `${state.fontSize * 1.35}px`,
-              lineHeight: `${state.lineHeight}%`
-            }}
-          >
+          {/* A4 Paper Canvas Wrapper for horizontal scroll on very narrow screens */}
+          <div className="w-full overflow-x-auto flex justify-center">
+            <div
+              ref={paperRef}
+              className="w-full max-w-2xl bg-white hwp-paper-shadow border-x border-b border-slate-300 p-4 sm:p-8 md:p-12 relative transition-all duration-150 font-hwp-myeongjo select-text min-w-[320px]"
+              style={{
+                minHeight: '840px',
+                letterSpacing: `${state.tracking * 0.12}px`,
+                fontSize: `${state.fontSize * 1.35}px`,
+                lineHeight: `${state.lineHeight}%`
+              }}
+            >
             {/* 1-Page Cut Boundary Line (visual guide) */}
             <div
               className={`absolute left-0 right-0 border-b-2 border-dashed z-20 pointer-events-none transition-all ${
@@ -785,6 +818,7 @@ export const HwpSimulator: React.FC = () => {
           </div>
         </div>
       </div>
+    </div>
 
       {/* Modals */}
       <FontDialogModal
@@ -794,7 +828,7 @@ export const HwpSimulator: React.FC = () => {
         scale={state.scale}
         fontSize={state.fontSize}
         onApply={(t, s, f) => {
-          setState((prev不易) => ({ ...prev不易, tracking: t, scale: s, fontSize: f }));
+          setState((prev) => ({ ...prev, tracking: t, scale: s, fontSize: f }));
           showFeedback('글자 모양 설정 적용 완료!');
         }}
       />
